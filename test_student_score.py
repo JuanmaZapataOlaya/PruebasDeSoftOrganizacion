@@ -1,13 +1,22 @@
 import pytest
 # Asumiendo que tu función está en un archivo llamado evaluador.py
 from student_score import evaluar_estudiante
+from calculadora import sumar,dividir
+
+def test_dividir_por2():
+    assert dividir(5,2) == 3
+
+def test_dividir_por0():
+    with pytest.raises (ValueError):
+        dividir(10,0)
 
 def test_regla_critica_faltas():
-    # ==============================================
-    # 1. Pruebas Normales
-    # ==============================================
+    """==============================================
+     1. Pruebas Normales
+    ============================================== """
     assert evaluar_estudiante(100, 0) == "SOBRESALIENTE"
     assert evaluar_estudiante(40, 0) == "REPROBADO"
+
 
 def test_limites_exactos():
     # ==============================================
@@ -16,6 +25,7 @@ def test_limites_exactos():
     assert evaluar_estudiante(60, 0) == "APROBADO"     # 60 es el mínimo para aprobar
     assert evaluar_estudiante(85, 0) == "EXCELENTE"    # 85 es el mínimo para excelente
     assert evaluar_estudiante(90, 0) == "SOBRESALIENTE" # 90 es el mínimo para sobresaliente
+
 
 def test_excepciones_validación():
     # ==============================================
@@ -28,6 +38,7 @@ def test_excepciones_validación():
     with pytest.raises(TypeError, match="Las faltas deben ser enteras"):
         evaluar_estudiante(80, "cinco")
 
+
 def test_valores_extremos():
     # ==============================================
     # 4. Pruebas valores extremos
@@ -38,6 +49,7 @@ def test_valores_extremos():
     # (Nota 100, 10 faltas -> resta 5 puntos -> nota 95 -> SOBRESALIENTE)
     assert evaluar_estudiante(100, 10) == "SOBRESALIENTE"
 
+
 def test_regla_penalizacion_faltas():
     # Nota 60 con 4 faltas (faltas > 3):
     # Se restan 5 puntos -> Nota real: 55 -> Debe REPROBAR
@@ -46,6 +58,7 @@ def test_regla_penalizacion_faltas():
     # Nota 90 con 4 faltas:
     # Se restan 5 puntos -> Nota real: 85 -> Debe ser EXCELENTE (no Sobresaliente)
     assert evaluar_estudiante(90, 4) == "EXCELENTE"
+
 
 def test_validacion_regla_critica():
     # Aunque tenga 100 de nota, si tiene más de 10 faltas debe reprobar

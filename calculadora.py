@@ -16,6 +16,3 @@ def dividir(a, b):
     return a/b
 
 
-x = 10
-y = 0
-print(dividir(x, y))
