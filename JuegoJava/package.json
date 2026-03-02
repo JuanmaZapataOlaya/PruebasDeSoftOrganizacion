@@ -1,0 +1,16 @@
+{
+  "name": "juegojava",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+"test": "jest --verbose"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jet": "^0.9.0-dev.13"
+  }
+}
